@@ -1,10 +1,10 @@
 <?php
-// menu_sql.php
+
 header('Content-Type: application/json; charset=utf-8');
 
 // Configuração da conexão
 $host = 'localhost';
-$dbname = 'atividade2'; // Verifique se é Atividade2 ou aula2310
+$dbname = 'atividade2'; 
 $username = 'root';
 $password = 'root';
 
@@ -16,9 +16,9 @@ try {
     exit;
 }
 
-// ==========================================================
-// 🚦 ROTEADOR: Decide o que fazer com base no parâmetro 'acao'
-// ==========================================================
+/
+// ROTAS
+
 $acao = isset($_GET['acao']) ? $_GET['acao'] : '';
 
 switch ($acao) {
@@ -39,12 +39,12 @@ switch ($acao) {
         exit;
 }
 
-// ==========================================================
-// 📦 FUNÇÕES DE CONSULTA
-// ==========================================================
+
+// FUNÇÕES DE CONSULTA
+
 
 function consultarPersonagens($pdo) {
-    // ATENÇÃO: Confirme se o nome da tabela no banco é 'Personagens' ou 'cliente'
+    
     $sql = "SELECT * FROM Personagens"; 
     try {
         $stmt = $pdo->query($sql);

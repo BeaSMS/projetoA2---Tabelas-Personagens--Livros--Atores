@@ -11,29 +11,29 @@
   <h1>Registros Wikia</h1>
 
   <div class="menu-container">
-    <div class="menu-item" onclick="carregarPersonagens()">📂 Listar Personagens</div> 
-    <div class="menu-item cadastrar" onclick="montarFormPersonagem()">➕ Cadastrar Personagem</div>
+    <div class="menu-item" onclick="carregarPersonagens()">Listar Personagens</div> 
+    <div class="menu-item cadastrar" onclick="montarFormPersonagem()">Cadastrar Personagem</div>
     
-    <div class="menu-item" onclick="carregarLivros()">📂 Listar Livros</div>
-    <div class="menu-item cadastrar" onclick="montarFormLivro()">➕ Cadastrar Livro</div>
+    <div class="menu-item" onclick="carregarLivros()">Listar Livros</div>
+    <div class="menu-item cadastrar" onclick="montarFormLivro()">Cadastrar Livro</div>
 
-    <div class="menu-item" onclick="carregarAtores()">📂 Listar Atores</div>
-    <div class="menu-item cadastrar" onclick="montarFormAtor()">➕ Cadastrar Ator</div>
+    <div class="menu-item" onclick="carregarAtores()">Listar Atores</div>
+    <div class="menu-item cadastrar" onclick="montarFormAtor()">Cadastrar Ator</div>
   </div>
 
   <div id="resultado"></div>
 
 <script>
-    // ==========================================
-    // 1. LISTAGEM DE PERSONAGENS
-    // ==========================================
+    
+    //LISTAGEM DE PERSONAGENS
+  
     async function carregarPersonagens() {
       const divResultado = document.getElementById('resultado');
-      divResultado.className = 'grid-view'; // Ativa o grid CSS
+      divResultado.className = 'grid-view';
       divResultado.innerHTML = "<p class='loading'>Carregando Personagens...</p>";
 
       try {
-        // ATENÇÃO: ?acao=listar_personagens é obrigatório
+        
         const response = await fetch('menu_sql.php?acao=listar_personagens'); 
         
         if (!response.ok) throw new Error("Erro HTTP: " + response.status);
@@ -42,7 +42,7 @@
         
         if(json.status === 'erro') throw new Error(json.mensagem);
 
-        // Limpa e Renderiza
+        
         divResultado.innerHTML = "";
         json.dados.forEach(p => {
             divResultado.innerHTML += `
@@ -56,14 +56,14 @@
         });
 
       } catch (error) {
-        divResultado.className = ''; // Remove grid para mostrar erro
+        divResultado.className = '';
         divResultado.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
       }
     }
 
-    // ==========================================
-    // 2. LISTAGEM DE LIVROS
-    // ==========================================
+
+    //LISTAGEM DE LIVROS
+
     async function carregarLivros() {
       const divResultado = document.getElementById('resultado');
       divResultado.className = 'grid-view';
@@ -93,9 +93,9 @@
       }
     }
 
-    // ==========================================
-    // 3. LISTAGEM DE ATORES
-    // ==========================================
+  
+    //LISTAGEM DE ATORES
+
     async function carregarAtores() {
       const divResultado = document.getElementById('resultado');
       divResultado.className = 'grid-view';
@@ -114,7 +114,7 @@
               style="border-left-color: #ffc107; cursor: pointer;" 
               onclick='editarAtor(${JSON.stringify(ator)})'>
                 <h3>${ator.nome}</h3>
-                <p class="info"><strong>Oscars:</strong> ${ator.num_oscars} 🏆</p>
+                <p class="info"><strong>Oscars:</strong> ${ator.num_oscars}</p>
                 <p class="info"><strong>Idade:</strong> ${ator.idade} anos</p>
               </div>
             `;
@@ -126,9 +126,9 @@
       }
     }
 
-    // ==========================================
-    // 4. CADASTRO DE PERSONAGEM
-    // ==========================================
+ 
+    //CADASTRO DE PERSONAGEM
+
     function montarFormPersonagem() {
       const divResultado = document.getElementById('resultado');
       divResultado.className = '';
@@ -176,19 +176,18 @@
         const result = await response.json();
 
         if (result.sucesso) {
-          divMsg.innerHTML = `<p style="color:green;">✅ ${result.mensagem}</p>`;
-          document.getElementById('formPersonagem').reset(); // ID corrigido
+          divMsg.innerHTML = `<p style="color:green;"> ${result.mensagem}</p>`;
+          document.getElementById('formPersonagem').reset();
         } else {
-          divMsg.innerHTML = `<p class="erro">❌ ${result.mensagem}</p>`;
+          divMsg.innerHTML = `<p class="erro"> ${result.mensagem}</p>`;
         }
       } catch (error) {
         divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
       }
     }
 
-    // ==========================================
-    // 5. CADASTRO DE LIVRO
-    // ==========================================
+    //CADASTRO DE LIVRO
+  
     function montarFormLivro() {
       const divResultado = document.getElementById('resultado');
       divResultado.className = ''; 
@@ -235,19 +234,19 @@
         const result = await response.json();
 
         if (result.sucesso) {
-          divMsg.innerHTML = `<p style="color:green;">✅ ${result.mensagem}</p>`;
+          divMsg.innerHTML = `<p style="color:green;"> ${result.mensagem}</p>`;
           document.getElementById('formLivro').reset();
         } else {
-          divMsg.innerHTML = `<p class="erro">❌ ${result.mensagem}</p>`;
+          divMsg.innerHTML = `<p class="erro">${result.mensagem}</p>`;
         }
       } catch (error) {
         divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
       }
     }
 
-    // ==========================================
-    // 6. CADASTRO DE ATOR
-    // ==========================================
+
+    //CADASTRO DE ATOR
+
     function montarFormAtor() {
       const divResultado = document.getElementById('resultado');
       divResultado.className = '';
@@ -290,31 +289,28 @@
         const result = await response.json();
 
         if (result.sucesso) {
-          divMsg.innerHTML = `<p style="color:green;">✅ ${result.mensagem}</p>`;
+          divMsg.innerHTML = `<p style="color:green;"> ${result.mensagem}</p>`;
           document.getElementById('formAtor').reset();
         } else {
-          divMsg.innerHTML = `<p class="erro">❌ ${result.mensagem}</p>`;
+          divMsg.innerHTML = `<p class="erro"> ${result.mensagem}</p>`;
         }
       } catch (error) {
         divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
       }
     }
 
-    // ======================================================
-    // 3. EDITAR PERSONAGEM
-    // ======================================================
+
+    //EDITAR PERSONAGEM
+
     function editarPersonagem(personagem) {
     const divResultado = document.getElementById('resultado');
     divResultado.className = '';
 
-    // 1. TRATAMENTO DE IDADE (campo 'number' REQUIRED)
-    // Se for null, usa string vazia.
     const idadeDisplay = (personagem.idade === null || String(personagem.idade).toLowerCase() === 'null') 
         ? '' 
         : personagem.idade;
 
-    // 2. TRATAMENTO DE ALTURA (campo 'text' formatado)
-    // Se for null, usa string vazia. Se for número, troca '.' por ','
+
     const alturaDisplay = (personagem.altura === null || String(personagem.altura).toLowerCase() === 'null') 
         ? '' 
         : String(personagem.altura).replace('.', ',');
@@ -337,11 +333,11 @@
             <label>Altura (vírgula):</label>
             <input type="text" id="altura_edit" value="${alturaDisplay}" placeholder="0,00"><br><br>
 
-            <button type="submit" style="background-color: orange;">Salvar Alterações</button>        
+            <button type="submit" style="background-color: orange;">Salvar Alterações</button>
             <button type="button" 
               style="background-color: #dc3545; margin-top: 10px;" 
               onclick="removerPersonagem(${personagem.id_personagem}, '${personagem.nome}')">
-              ❌ Remover Personagem
+              Remover Personagem
             </button>
 
         </form>
@@ -352,13 +348,12 @@
     async function salvarAlteracaoPersonagem(event) {
         event.preventDefault(); 
 
-        // 1. Coleta dados
         const id_personagem = document.getElementById('id_personagem').value;
         const nome = document.getElementById('nome_edit').value.trim();
         const local = document.getElementById('local_edit').value.trim();
         const idade = document.getElementById('idade_edit').value.trim();
         
-        // 2. Trata a vírgula para o formato SQL (ponto)
+ 
         let altura = document.getElementById('altura_edit').value.trim();
         altura = altura.replace(',', '.'); 
         
@@ -375,24 +370,24 @@
             const result = await response.json();
 
             if (result.sucesso) {
-                divMsg.innerHTML = `<p style="color:green;">✅ ${result.mensagem}</p>`;
-                // Opcional: Recarregar a lista para ver a alteração
+                divMsg.innerHTML = `<p style="color:green;"> ${result.mensagem}</p>`;
+   
                 setTimeout(carregarPersonagens, 1500); 
             } else {
-                divMsg.innerHTML = `<p class="erro">❌ ${result.mensagem}</p>`;
+                divMsg.innerHTML = `<p class="erro"> ${result.mensagem}</p>`;
             }
         } catch (error) {
             divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
         }
     }
-    // ======================================================
-    // 7. EDITAR LIVRO
-    // ======================================================
+   
+    // EDITAR LIVRO
+    
     function editarLivro(livro) {
         const divResultado = document.getElementById('resultado');
-        divResultado.className = ''; // Remove grid
+        divResultado.className = ''; 
         
-        // ATENÇÃO: Assumindo que o ID da tabela Livros se chama 'id_livro'
+     
         divResultado.innerHTML = `
           <h2>Alterar Livro ID: ${livro.id_livro}</h2>
           <form id="formAlterarLivro" onsubmit="salvarAlteracaoLivro(event)">
@@ -426,14 +421,14 @@
     async function salvarAlteracaoLivro(event) {
         event.preventDefault(); 
 
-        // 1. Coleta dados (Note o sufixo _edit nos IDs)
+
         const id_livro = document.getElementById('id_livro_edit').value;
         const nome = document.getElementById('nome_livro_edit').value.trim();
         const descricao = document.getElementById('desc_livro_edit').value.trim();
         const autor = document.getElementById('autor_livro_edit').value.trim();
         const genero = document.getElementById('genero_livro_edit').value.trim();
         
-        // Div de mensagem que criamos no formulário
+
         const divMsg = document.getElementById('mensagem_alteracao_livro');
         divMsg.innerHTML = "<p class='loading'>Enviando alterações...</p>";
 
@@ -450,20 +445,20 @@
             const result = await response.json();
 
             if (result.sucesso) {
-                divMsg.innerHTML = `<p style="color:green;">✅ ${result.mensagem}</p>`;
+                divMsg.innerHTML = `<p style="color:green;"> ${result.mensagem}</p>`;
                 // Recarregar a lista de livros para ver o resultado após 1.5s
                 setTimeout(carregarLivros, 1500); 
             } else {
-                divMsg.innerHTML = `<p class="erro">❌ ${result.mensagem}</p>`;
+                divMsg.innerHTML = `<p class="erro"> ${result.mensagem}</p>`;
             }
         } catch (error) {
             divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
         }
     }
 
-    // ======================================================
-    // 9. EDITAR ATOR
-    // ======================================================
+
+    // EDITAR ATOR
+
     function editarAtor(ator) {
         const divResultado = document.getElementById('resultado');
         divResultado.className = ''; 
@@ -493,19 +488,16 @@
         `;
     }
 
-    // ======================================================
-    // 10. FUNÇÃO DE ENVIO DE ALTERAÇÃO - ENVIA DADOS AO PHP
-    // ======================================================
     async function salvarAlteracaoAtor(event) {
         event.preventDefault(); 
 
-        // 1. Coleta dados
+        
         const id_ator = document.getElementById('id_ator_edit').value;
         const nome = document.getElementById('nome_ator_edit').value.trim();
         const num_oscars = document.getElementById('oscars_ator_edit').value.trim();
         const idade = document.getElementById('idade_ator_edit').value.trim();
         
-        // Div de mensagem que criamos no formulário
+        
         const divMsg = document.getElementById('mensagem_alteracao_ator');
         divMsg.innerHTML = "<p class='loading'>Enviando alterações...</p>";
 
@@ -521,60 +513,60 @@
             const result = await response.json();
 
             if (result.sucesso) {
-                divMsg.innerHTML = `<p style="color:green;">✅ ${result.mensagem}</p>`;
-                // Recarregar a lista para ver a alteração
+                divMsg.innerHTML = `<p style="color:green;"> ${result.mensagem}</p>`;
+                
                 setTimeout(carregarAtores, 1500); 
             } else {
-                divMsg.innerHTML = `<p class="erro">❌ ${result.mensagem}</p>`;
+                divMsg.innerHTML = `<p class="erro"> ${result.mensagem}</p>`;
             }
         } catch (error) {
             divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
         }
     }
 
-    // ======================================================
-// 5. FUNÇÃO DE REMOÇÃO DE PERSONAGEM
-// ======================================================
-async function removerPersonagem(id, nome) {
-    // 1. Pede confirmação
-    if (!confirm(`Tem certeza que deseja remover o personagem: ${nome} (ID: ${id})? Essa ação é irreversível.`)) {
-        return;
-    }
-    
-    // Div de mensagem que está no formulário de edição
-    const divMsg = document.getElementById('mensagem_alteracao'); 
-    divMsg.innerHTML = "<p class='loading'>Removendo...</p>";
 
-    try {
-        const response = await fetch('deletar_personagem.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id_personagem: id }) // Envia o ID para o PHP
-        });
+    // REMOVER PERSONAGEM
 
-        const result = await response.json();
-
-        if (result.sucesso) {
-            divMsg.innerHTML = `<p style="color:green;">✅ ${result.mensagem}</p>`;
-            // Recarregar a lista principal após deletar
-            setTimeout(carregarPersonagens, 1500); 
-        } else {
-            divMsg.innerHTML = `<p class="erro">❌ ${result.mensagem}</p>`;
+    async function removerPersonagem(id, nome) {
+        
+        if (!confirm(`Tem certeza que deseja remover o personagem: ${nome} (ID: ${id})? Essa ação é irreversível.`)) {
+            return;
         }
-    } catch (error) {
-        divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
-    }
-    }
-    // ======================================================
-    // 6. FUNÇÃO DE REMOÇÃO DE LIVRO
-    // ======================================================
+        
+        
+        const divMsg = document.getElementById('mensagem_alteracao'); 
+        divMsg.innerHTML = "<p class='loading'>Removendo...</p>";
+
+        try {
+            const response = await fetch('deletar_personagem.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id_personagem: id })
+            });
+
+            const result = await response.json();
+
+            if (result.sucesso) {
+                divMsg.innerHTML = `<p style="color:green;"> ${result.mensagem}</p>`;
+                
+                setTimeout(carregarPersonagens, 1500); 
+            } else {
+                divMsg.innerHTML = `<p class="erro"> ${result.mensagem}</p>`;
+            }
+        } catch (error) {
+            divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
+        }
+        }
+
+    // FUNÇÃO DE REMOÇÃO DE LIVRO
+ 
     async function removerLivro(id, nome) {
-        // 1. Pede confirmação
+        
         if (!confirm(`Tem certeza que deseja remover o Livro: ${nome} (ID: ${id})? Essa ação é irreversível.`)) {
             return;
         }
         
-        // Usa a div de mensagem do formulário de edição de livro
+
         const divMsg = document.getElementById('mensagem_alteracao_livro'); 
         divMsg.innerHTML = "<p class='loading'>Removendo...</p>";
 
@@ -582,33 +574,33 @@ async function removerPersonagem(id, nome) {
             const response = await fetch('deletar_livro.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id_livro: id }) // Envia o ID
+                body: JSON.stringify({ id_livro: id }) 
             });
 
             const result = await response.json();
 
             if (result.sucesso) {
-                divMsg.innerHTML = `<p style="color:green;">✅ ${result.mensagem}</p>`;
-                // Recarregar a lista principal após deletar
+                divMsg.innerHTML = `<p style="color:green;"> ${result.mensagem}</p>`;
+                
                 setTimeout(carregarLivros, 1500); 
             } else {
-                divMsg.innerHTML = `<p class="erro">❌ ${result.mensagem}</p>`;
+                divMsg.innerHTML = `<p class="erro"> ${result.mensagem}</p>`;
             }
         } catch (error) {
             divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
         }
     }
 
-    // ======================================================
+    
     // 7. FUNÇÃO DE REMOÇÃO DE ATOR
-    // ======================================================
+
     async function removerAtor(id, nome) {
-        // 1. Pede confirmação
+        
         if (!confirm(`Tem certeza que deseja remover o Ator(a): ${nome} (ID: ${id})? Essa ação é irreversível.`)) {
             return;
         }
         
-        // Usa a div de mensagem do formulário de edição de ator
+        
         const divMsg = document.getElementById('mensagem_alteracao_ator'); 
         divMsg.innerHTML = "<p class='loading'>Removendo...</p>";
 
@@ -616,17 +608,17 @@ async function removerPersonagem(id, nome) {
             const response = await fetch('deletar_ator.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ id_ator: id }) // Envia o ID
+                body: JSON.stringify({ id_ator: id }) 
             });
 
             const result = await response.json();
 
             if (result.sucesso) {
-                divMsg.innerHTML = `<p style="color:green;">✅ ${result.mensagem}</p>`;
-                // Recarregar a lista principal após deletar
+                divMsg.innerHTML = `<p style="color:green;"> ${result.mensagem}</p>`;
+                
                 setTimeout(carregarAtores, 1500); 
             } else {
-                divMsg.innerHTML = `<p class="erro">❌ ${result.mensagem}</p>`;
+                divMsg.innerHTML = `<p class="erro"> ${result.mensagem}</p>`;
             }
         } catch (error) {
             divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;

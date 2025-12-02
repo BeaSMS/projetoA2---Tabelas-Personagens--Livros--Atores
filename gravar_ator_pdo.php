@@ -17,7 +17,7 @@ $num_oscars = isset($dados["num_oscars"]) ? (int)$dados["num_oscars"] : 0;
 $idade      = isset($dados["idade"]) ? (int)$dados["idade"] : null;
 
 /* ======================================================
-   ⚙️ CONEXÃO PDO COM O BANCO DE DADOS Atividade2
+   //CONEXÃO COM O BANCO DE DADOS Atividade2
    ====================================================== */
 $host = "localhost";
 $dbname = "Atividade2"; // Verifique se o nome do banco está correto
