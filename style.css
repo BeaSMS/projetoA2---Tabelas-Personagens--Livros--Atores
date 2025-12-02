@@ -1,28 +1,27 @@
-
-    body {
+body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #f0f2f5;
       margin: 0;
       padding: 20px;
-    }
+}
 
-    h1 {
+h1 {
       text-align: center;
       margin-bottom: 20px;
       color: #333;
-    }
+}
 
     /* Container do menu */
-    .menu-container {
+.menu-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 15px;
       max-width: 900px;
       margin: 0 auto;
-    }
+}
 
     /* Blocos do menu */
-    .menu-item {
+.menu-item {
       background: #007BFF;
       color: white;
       text-align: center;
@@ -33,74 +32,74 @@
       transition: 0.3s;
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       user-select: none;
-    }
+}
 
-    .menu-item:hover {
+.menu-item:hover {
       background: #0056b3;
       transform: translateY(-3px);
-    }
+}
 
     /* Estilos diferentes para Cadastrar (Opcional, para visual) */
-    .menu-item.cadastrar {
+.menu-item.cadastrar {
       background: #28a745;
-    }
-    .menu-item.cadastrar:hover {
+}
+.menu-item.cadastrar:hover {
       background: #1e7e34;
-    }
+}
 
     /* Área de resultado */
-    #resultado {
+#resultado {
       max-width: 900px;
       margin: 30px auto;
       padding: 20px;
       /* O grid será ativado via JS quando necessário, ou deixamos padrão para cards */
-    }
+}
 
     /* Classe auxiliar para quando for exibir CARDS (Grid) */
-    .grid-view {
+.grid-view {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
-    }
+}
 
     /* Estilo do Card individual */
-    .card {
+ .card {
       background: white;
       border-radius: 12px;
       padding: 20px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       transition: transform 0.2s;
       border-left: 5px solid #007BFF;
-    }
+}   
 
-    .card:hover {
+.card:hover {
       transform: scale(1.02);
-    }
+}
 
-    .card h3 {
+.card h3 {
       margin-top: 0;
       color: #007bff;
       border-bottom: 1px solid #eee;
       padding-bottom: 10px;
-    }
+}
 
-    .info {
+.info {
       margin: 8px 0;
       color: #555;
       font-size: 14px;
-    }
+}
 
     /* Formulários */
-    form {
+form {
       background: #fff;
       padding: 20px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       max-width: 500px;
       margin: 0 auto;
-    }
+}
 
-    input {
+input {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -108,9 +107,9 @@
       border: 1px solid #ddd;
       border-radius: 5px;
       box-sizing: border-box;
-    }
+}
 
-    button {
+button {
       width: 100%;
       padding: 10px;
       background: #28a745;
@@ -119,9 +118,9 @@
       border-radius: 5px;
       font-size: 16px;
       cursor: pointer;
-    }
-    button:hover { background: #218838; }
+}
+button:hover { background: #218838; }
 
-    /* Mensagens */
-    .erro { color: red; font-weight: bold; text-align: center; }
-    .loading { text-align: center; font-style: italic; color: #666; }
+/* Mensagens */
+.erro { color: red; font-weight: bold; text-align: center; }
+.loading { text-align: center; font-style: italic; color: #666; }
