@@ -11,8 +11,8 @@ if (empty($dados["id_personagem"]) || empty($dados["nome"])) {
 $id = (int)$dados["id_personagem"]; 
 $nome = trim($dados["nome"]);
 $local = trim($dados["local"]);
-$idade = isset($dados["idade"]) ? (int)$dados["idade"] : null; // Converte para INT
-$altura = isset($dados["altura"]) ? (float)str_replace(',', '.', $dados["altura"]) : null; // Converte para FLOAT
+$idade = isset($dados["idade"]) ? (int)$dados["idade"] : null; 
+$altura = isset($dados["altura"]) ? (float)str_replace(',', '.', $dados["altura"]) : null; 
 
 $host = "localhost";
 $dbname = "Atividade2";
@@ -43,7 +43,7 @@ try {
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        echo json_encode(["sucesso" => true, "mensagem" => "✅ Personagem ID {$id} alterado com sucesso!"]);
+        echo json_encode(["sucesso" => true, "mensagem" => "Personagem ID {$id} alterado com sucesso!"]);
     } else {
         echo json_encode(["sucesso" => false, "mensagem" => "Nenhum dado alterado (ID não encontrado ou dados iguais)."]);
     }

@@ -1,10 +1,9 @@
 <?php
 header("Content-Type: application/json; charset=utf-8");
 
-// Recebe os dados JSON (somente o ID é necessário)
 $dados = json_decode(file_get_contents("php://input"), true);
 
-// 1. Verifica se o ID foi recebido
+
 if (empty($dados["id_livro"])) {
     echo json_encode(["sucesso" => false, "mensagem" => "ID do Livro ausente."]);
     exit;
@@ -12,7 +11,7 @@ if (empty($dados["id_livro"])) {
 
 $id = (int)$dados["id_livro"];
 
-/* ⚙️ CONEXÃO PDO COM O BANCO DE DADOS Atividade2 */
+/*CONEXÃO PDO COM O BANCO DE DADOS Atividade2 */
 $host = "localhost";
 $dbname = "Atividade2";
 $usuario = "root";
@@ -24,7 +23,7 @@ try {
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
     ]);
 
-    // 2. Comando SQL de DELETE
+
     $sql = "DELETE FROM LIVROS WHERE id_livro = :id";
 
     $stmt = $pdo->prepare($sql);
@@ -33,7 +32,7 @@ try {
     $stmt->execute();
 
     if ($stmt->rowCount() > 0) {
-        echo json_encode(["sucesso" => true, "mensagem" => "✅ Livro ID {$id} removido com sucesso!"]);
+        echo json_encode(["sucesso" => true, "mensagem" => "Livro ID {$id} removido com sucesso!"]);
     } else {
         echo json_encode(["sucesso" => false, "mensagem" => "Nenhum registro encontrado com o ID {$id}."]);
     }

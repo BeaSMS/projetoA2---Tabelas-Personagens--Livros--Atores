@@ -35,7 +35,7 @@ try {
 
     $stmt->execute();
 
-    echo json_encode(["sucesso" => true, "mensagem" => "✅ Livro cadastrado com sucesso!"]);
+    echo json_encode(["sucesso" => true, "mensagem" => "Livro cadastrado com sucesso!"]);
 
 } catch (PDOException $e) {
     echo json_encode([

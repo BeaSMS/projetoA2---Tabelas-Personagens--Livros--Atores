@@ -16,7 +16,6 @@ try {
     exit;
 }
 
-/
 // ROTAS
 
 $acao = isset($_GET['acao']) ? $_GET['acao'] : '';
