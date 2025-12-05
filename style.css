@@ -1,58 +1,148 @@
 body {
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-background: #f0f2f5;
-margin: 0;
-padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #3c1b64;
+    margin: 0;
 }
 
-h1 {
-text-align: center;
-margin-bottom: 20px;
-color: #333;
+.principal {
+    display: flex;
+    align-items: flex-start;
 }
 
-/* Container do menu */
 .menu-container {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-gap: 15px;
-max-width: 900px;
-margin: 0 auto;
+    background-color: #270f49;
+    width: 300px; 
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    position: sticky;
 }
 
-/* Blocos do menu */
-.menu-item {
-background: #007BFF;
-color: white;
-text-align: center;
-padding: 20px 10px;
-border-radius: 8px;
-font-size: 16px;
-cursor: pointer;
-transition: 0.3s;
-box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-user-select: none;
+.menu-item-cadastrar1,
+.menu-item-cadastrar2,
+.menu-item-cadastrar3,
+.menu-item1, 
+.menu-item2,
+.menu-item3{
+    text-align: left;
+    color: white;
+    background: #1c1c3b;
+    padding: 25px 40px;
+    margin: 8px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transform: translateY(-3px);
+    transition: 0.3s;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.menu-item:hover {
-background: #0056b3;
-transform: translateY(-3px);
+.menu-item1:hover { background: #e83eaf; }
+.menu-item-cadastrar1:hover { background: #ff215a; }
+.menu-item2:hover { background: #2881ff; }
+.menu-item-cadastrar2:hover { background: #00bba9; }
+.menu-item3:hover { background: #ff8e00; }
+.menu-item-cadastrar3:hover { background: #f1af00; }
+
+/* Formulários */
+h2 { color:white; }
+
+form {
+    padding: 20px;
+    border-radius: 10px;  
+    max-width: 500px;
 }
 
-/* Estilos diferentes para Cadastrar (Opcional, para visual) */
-.menu-item.cadastrar {
-background: #28a745;
-}
-.menu-item.cadastrar:hover {
-background: #1e7e34;
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.1s;
+    border-radius: 5px;
+    background-color: rgba(28, 28, 59, 0.8);
+    color: white;
 }
 
-/* Área de resultado */
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+}
+
+#formPersonagem {
+    background: rgba(232, 62, 175, 0.2);
+    box-shadow: 0 4px 10px #ff215a;
+    color: #dab2ff;
+    border: 1px solid #ff215a;
+}
+.inputPersonagem{ 
+    border: 2px solid #ff215a; 
+}
+.inputPersonagem:focus {
+    border: 3px solid #ff215a;
+    box-shadow: 0 0 8px #ff215a;
+}
+.buttonPersonagem {
+    background: #ff215a;
+}
+.buttonPersonagem:hover {
+    box-shadow: 0 0 8px #ff215a;   
+}
+
+#formLivro {
+    background: rgba(0, 187, 169, 0.2);
+    box-shadow: 0 4px 10px #00bba9;
+    color: #7a94dd;
+    border: 1px solid #00bba9;
+} 
+.inputLivro{
+    border: 2px solid #00bba9;
+}
+.inputLivro:focus {
+    border: 3px solid #00bba9;
+    box-shadow: 0 0 8px #00bba9;
+}
+.buttonLivro {
+    background: #00bba9;
+}
+.buttonLivro:hover {
+    box-shadow: 0 0 8px #00bba9;   
+}
+
+#formAtor {
+    background: rgba(241, 175, 0, 0.2);
+    box-shadow: 0 4px 10px #f1af00;
+    color: #ffb86a;
+    border: 1px solid #f1af00;
+} 
+.inputAtor{
+    border: 2px solid #f1af00;
+}
+.inputAtor:focus {
+    border: 3px solid #f1af00;
+    box-shadow: 0 0 8px #f1af00;
+}
+.buttonAtor {
+    background: #f1af00;
+}
+.buttonAtor:hover {
+    box-shadow: 0 0 8px #f1af00;   
+}
+
+
+
+
 #resultado {
-max-width: 900px;
-margin: 30px auto;
-padding: 20px;
-/* O grid será ativado via JS quando necessário, ou deixamos padrão para cards */
+    flex: 1;
+    padding: 20px;
+    margin-left: 20px;
 }
 
 /* Classe auxiliar para quando for exibir CARDS (Grid) */
@@ -86,40 +176,9 @@ padding-bottom: 10px;
 .info {
 margin: 8px 0;
 color: #555;
-      font-size: 14px;
+font-size: 14px;
 }
 
-/* Formulários */
-form {
-background: #fff;
-padding: 20px;
-border-radius: 10px;
-box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-max-width: 500px;
-margin: 0 auto;
-}
-
-input {
-width: 100%;
-padding: 10px;
-margin-top: 5px;
-margin-bottom: 15px;
-border: 1px solid #ddd;
-border-radius: 5px;
-box-sizing: border-box;
-}
-
-button {
-width: 100%;
-padding: 10px;
-background: #28a745;
-color: white;
-border: none;
-border-radius: 5px;
-font-size: 16px;
-cursor: pointer;
-}
-button:hover { background: #218838; }
 
 /* Mensagens */
 .erro { color: red; font-weight: bold; text-align: center; }
