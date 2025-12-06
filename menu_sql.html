@@ -10,7 +10,7 @@
 <div class="principal">
     <div class="menu-container">
         <nav>
-            <div class="imagem"><img src="imagens/LogoComTexto.png"></div><br>
+            <div class="imagem"><img src="imagens/LogoComTexto.png" alt="Logo Mini Wikia"></div><br>
            
             <div class="menu-item1" onclick="carregarPersonagens()">Listar Personagens</div>
             <div class="menu-item-cadastrar1" onclick="montarFormPersonagem()">Cadastrar Personagem</div>
@@ -67,7 +67,7 @@
         json.dados.forEach(livro => {
             divResultado.innerHTML += `  
                 <div class="card2" onclick='editarLivro(${JSON.stringify(livro)})'>
-                  <h3 cardTit2>${livro.nome}</h3>
+                  <h3 class="cardTit2">${livro.nome}</h3>
                   <p class="info"><strong>Autor:</strong> ${livro.autor}</p>
                   <p class="info"><strong>Gênero:</strong> ${livro.genero}</p>
                   <p class="info"><em>${livro.descricao}</em></p>
@@ -111,7 +111,7 @@
       divResultado.className = '';
      
       divResultado.innerHTML = `
-        <h2>Novo Personagem</h2>
+        <h2>Novo Personagem</h2> <br>
         <form id="formPersonagem" onsubmit="salvarPersonagem(event)">
           <label>Nome:</label>
           <input type="text" id="nome" class="inputPersonagem" required placeholder="Nome do personagem">
@@ -159,7 +159,7 @@
       const divResultado = document.getElementById('resultado');
       divResultado.className = '';
       divResultado.innerHTML = `
-        <h2>Novo Livro</h2>
+        <h2>Novo Livro</h2> <br>
         <form id="formLivro" onsubmit="salvarLivro(event)">
           <label>Nome do Livro:</label>
           <input type="text" id="nome_livro" class="inputLivro" required>
@@ -207,7 +207,7 @@
       const divResultado = document.getElementById('resultado');
       divResultado.className = '';
       divResultado.innerHTML = `
-        <h2>Novo Ator/Atriz</h2>
+        <h2>Novo Ator/Atriz</h2> <br>
         <form id="formAtor" onsubmit="salvarAtor(event)">
           <label>Nome:</label>
           <input type="text" id="nome_ator" class="inputAtor" required>
@@ -261,20 +261,19 @@
  
  
     divResultado.innerHTML = `
-        <h2>Alterar Personagem ID: ${personagem.id_personagem}</h2>
+        <h2>Alterar Personagem ${personagem.id_personagem}</h2> <br>
         <form id="formAlterarPersonagem" onsubmit="salvarAlteracaoPersonagem(event)">
-            <input type="hidden" id="id_personagem" value="${personagem.id_personagem}">
+            <input type="hidden" id="id_personagem" class="inputAlterar" value="${personagem.id_personagem}">
             <label>Nome:</label>
-            <input type="text" id="nome_edit" required value="${personagem.nome}"><br><br>
+            <input type="text" id="nome_edit" class="inputAlterar" required value="${personagem.nome}"><br><br>
             <label>Local:</label>
-            <input type="text" id="local_edit" required value="${personagem.local}"><br><br>
+            <input type="text" id="local_edit" class="inputAlterar" required value="${personagem.local}"><br><br>
             <label>Idade:</label>
-            <input type="number" id="idade_edit" required value="${idadeDisplay}"><br><br>
+            <input type="number" id="idade_edit" class="inputAlterar" required value="${idadeDisplay}"><br><br>
             <label>Altura (vírgula):</label>
-            <input type="text" id="altura_edit" value="${alturaDisplay}" placeholder="0,00"><br><br>
-            <button type="submit" style="background-color: orange;">Salvar Alterações</button>
-            <button type="button"
-              style="background-color: #dc3545; margin-top: 10px;"
+            <input type="text" id="altura_edit" class="inputAlterar" value="${alturaDisplay}" placeholder="0,00"><br><br>
+            <button type="submit" class="buttonAlterar"> Salvar Alterações</button>
+            <button type="button" class="buttonRemover"
               onclick="removerPersonagem(${personagem.id_personagem}, '${personagem.nome}')">
               Remover Personagem
             </button>
@@ -318,20 +317,19 @@
         divResultado.className = '';
        
         divResultado.innerHTML = `
-          <h2>Alterar Livro ID: ${livro.id_livro}</h2>
+          <h2>Alterar Livro ${livro.id_livro}</h2> <br>
           <form id="formAlterarLivro" onsubmit="salvarAlteracaoLivro(event)">
-            <input type="hidden" id="id_livro_edit" value="${livro.id_livro}">
+            <input type="hidden" id="id_livro_edit" class="inputAlterar" value="${livro.id_livro}">
             <label>Nome do Livro:</label>
-            <input type="text" id="nome_livro_edit" required value="${livro.nome}"><br><br>
+            <input type="text" id="nome_livro_edit" class="inputAlterar" required value="${livro.nome}"><br><br>
             <label>Descrição:</label>
-            <input type="text" id="desc_livro_edit" value="${livro.descricao}"><br><br>
+            <input type="text" id="desc_livro_edit" class="inputAlterar" value="${livro.descricao}"><br><br>
             <label>Autor:</label>
-            <input type="text" id="autor_livro_edit" value="${livro.autor}"><br><br>
+            <input type="text" id="autor_livro_edit" class="inputAlterar" value="${livro.autor}"><br><br>
             <label>Gênero:</label>
-            <input type="text" id="genero_livro_edit" required value="${livro.genero}"><br><br>
-            <button type="submit" style="background-color: orange;">Salvar Alterações do Livro</button>
-            <button type="button"
-                style="background-color: #dc3545; margin-top: 10px;"
+            <input type="text" id="genero_livro_edit" class="inputAlterar" required value="${livro.genero}"><br><br>
+            <button type="submit" class="buttonAlterar"> Salvar Alterações do Livro</button>
+            <button type="button" class="buttonRemover"
                 onclick="removerLivro(${livro.id_livro}, '${livro.nome}')">
                 Remover Livro
             </button>
@@ -374,18 +372,17 @@
         const divResultado = document.getElementById('resultado');
         divResultado.className = '';
         divResultado.innerHTML = `
-          <h2>Alterar Ator/Atriz ID: ${ator.id_ator}</h2>
+          <h2>Alterar Ator/Atriz ${ator.id_ator}</h2> <br>
           <form id="formAlterarAtor" onsubmit="salvarAlteracaoAtor(event)">
-            <input type="hidden" id="id_ator_edit" value="${ator.id_ator}">
+            <input type="hidden" id="id_ator_edit" class="inputAlterar" value="${ator.id_ator}">
             <label>Nome:</label>
-            <input type="text" id="nome_ator_edit" required value="${ator.nome}"><br><br>
+            <input type="text" id="nome_ator_edit" class="inputAlterar" required value="${ator.nome}"><br><br>
             <label>Número de Oscars:</label>
-            <input type="number" id="oscars_ator_edit" value="${ator.num_oscars}"><br><br>
+            <input type="number" id="oscars_ator_edit" class="inputAlterar" value="${ator.num_oscars}"><br><br>
             <label>Idade:</label>
-            <input type="number" id="idade_ator_edit" required value="${ator.idade}"><br><br>
-            <button type="submit" style="background-color: orange;">Salvar Alterações do Ator</button>
-            <button type="button"
-                style="background-color: #dc3545; margin-top: 10px;"
+            <input type="number" id="idade_ator_edit" class="inputAlterar" required value="${ator.idade}"><br><br>
+            <button type="submit" class="buttonAlterar">Salvar Alterações do Ator</button>
+            <button type="button" class="buttonRemover"
                 onclick="removerAtor(${ator.id_ator}, '${ator.nome}')">
                 Remover Ator
             </button>
