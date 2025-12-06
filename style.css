@@ -3,56 +3,66 @@ body {
     background: #3c1b64;
     margin: 0;
 }
-
+ 
 .principal {
     display: flex;
     align-items: flex-start;
 }
-
+ 
 .menu-container {
     background-color: #270f49;
-    width: 300px; 
+    width: 400px;
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
     position: sticky;
 }
-
+ 
+.imagem {
+    justify-content: center;
+    display: flex;
+}
+img {
+    width: 90%;
+    height: auto;
+}
+ 
 .menu-item-cadastrar1,
 .menu-item-cadastrar2,
 .menu-item-cadastrar3,
-.menu-item1, 
+.menu-item1,
 .menu-item2,
-.menu-item3{
+.menu-item3{    
     text-align: left;
     color: white;
     background: #1c1c3b;
     padding: 25px 40px;
-    margin: 8px;
+    margin: 15px 8px 8px 8px;
     border-radius: 8px;
-    font-size: 16px;
+    font-size: 20px;
+    font-weight: bold;
     cursor: pointer;
     transform: translateY(-3px);
     transition: 0.3s;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
-
+ 
 .menu-item1:hover { background: #e83eaf; }
 .menu-item-cadastrar1:hover { background: #ff215a; }
 .menu-item2:hover { background: #2881ff; }
 .menu-item-cadastrar2:hover { background: #00bba9; }
 .menu-item3:hover { background: #ff8e00; }
 .menu-item-cadastrar3:hover { background: #f1af00; }
-
+ 
 /* Formulários */
 h2 { color:white; }
-
+ 
 form {
     padding: 20px;
     border-radius: 10px;  
     max-width: 500px;
 }
-
+ 
 input {
     width: 100%;
     padding: 10px;
@@ -65,7 +75,7 @@ input {
     background-color: rgba(28, 28, 59, 0.8);
     color: white;
 }
-
+ 
 button {
     width: 100%;
     padding: 10px;
@@ -75,15 +85,15 @@ button {
     cursor: pointer;
     color: white;
 }
-
+ 
 #formPersonagem {
     background: rgba(232, 62, 175, 0.2);
     box-shadow: 0 4px 10px #ff215a;
     color: #dab2ff;
     border: 1px solid #ff215a;
 }
-.inputPersonagem{ 
-    border: 2px solid #ff215a; 
+.inputPersonagem{
+    border: 2px solid #ff215a;
 }
 .inputPersonagem:focus {
     border: 3px solid #ff215a;
@@ -93,15 +103,15 @@ button {
     background: #ff215a;
 }
 .buttonPersonagem:hover {
-    box-shadow: 0 0 8px #ff215a;   
+    box-shadow: 0 0 8px #ff215a;  
 }
-
+ 
 #formLivro {
     background: rgba(0, 187, 169, 0.2);
     box-shadow: 0 4px 10px #00bba9;
     color: #7a94dd;
     border: 1px solid #00bba9;
-} 
+}
 .inputLivro{
     border: 2px solid #00bba9;
 }
@@ -113,15 +123,15 @@ button {
     background: #00bba9;
 }
 .buttonLivro:hover {
-    box-shadow: 0 0 8px #00bba9;   
+    box-shadow: 0 0 8px #00bba9;  
 }
-
+ 
 #formAtor {
     background: rgba(241, 175, 0, 0.2);
     box-shadow: 0 4px 10px #f1af00;
     color: #ffb86a;
     border: 1px solid #f1af00;
-} 
+}
 .inputAtor{
     border: 2px solid #f1af00;
 }
@@ -133,53 +143,79 @@ button {
     background: #f1af00;
 }
 .buttonAtor:hover {
-    box-shadow: 0 0 8px #f1af00;   
+    box-shadow: 0 0 8px #f1af00;  
 }
-
-
-
-
+ 
 #resultado {
     flex: 1;
     padding: 20px;
     margin-left: 20px;
 }
-
-/* Classe auxiliar para quando for exibir CARDS (Grid) */
+ 
 .grid-view {
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 gap: 20px;
 }
-
-/* Estilo do Card individual */
- .card {
-background: white;
+ 
+.card1{
+background-color: rgba(231, 62, 175, 0.2) ;
+color: #ffc4eb;
 border-radius: 12px;
 padding: 20px;
 box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 transition: transform 0.2s;
-border-left: 5px solid #007BFF;
-}   
-
+border-left: 5px solid #e73eaf;
+font-size: 20px;
+cursor:pointer
+}
+.card2{
+background-color: rgb(40, 129, 255, 0.2) ;
+color: #9fc7ff;
+border-radius: 12px;
+padding: 20px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+transition: transform 0.2s;
+border-left: 5px solid #2881ff;
+font-size: 20px;
+cursor: pointer
+}
+.card3{
+background-color: rgba(255, 142, 0, 0.2) ;
+color: #ffc988;
+border-radius: 12px;
+padding: 20px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+transition: transform 0.2s;
+border-left: 5px solid #ff8e00;
+font-size: 20px;
+cursor:pointer
+}
 .card:hover {
 transform: scale(1.02);
 }
-
 .card h3 {
-margin-top: 0;
-color: #007bff;
-border-bottom: 1px solid #eee;
+border-bottom: 1px solid;
 padding-bottom: 10px;
 }
-
+.cardTit1 {
+color: #e73eaf;
+}
+.cardTit2 {
+color: #2881ff;
+}
+.cardTit3 {
+color: #ff8e00;
+}
+ 
 .info {
 margin: 8px 0;
-color: #555;
-font-size: 14px;
+color: white;
+font-size: 16px;
 }
-
-
+ 
+ 
 /* Mensagens */
 .erro { color: red; font-weight: bold; text-align: center; }
 .loading { text-align: center; font-style: italic; color: #666; }
+ 

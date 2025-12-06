@@ -7,11 +7,12 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <div class="principal">
     <div class="menu-container">
         <nav>
-            <div class="menu-item1" onclick="carregarPersonagens()">Listar Personagens</div> 
+            <div class="imagem"><img src="imagens/LogoComTexto.png"></div><br>
+           
+            <div class="menu-item1" onclick="carregarPersonagens()">Listar Personagens</div>
             <div class="menu-item-cadastrar1" onclick="montarFormPersonagem()">Cadastrar Personagem</div>
             <div class="menu-item2" onclick="carregarLivros()">Listar Livros</div>
             <div class="menu-item-cadastrar2" onclick="montarFormLivro()">Cadastrar Livro</div>
@@ -21,29 +22,29 @@
     </div>
     <div id="resultado"></div>
 </div>  
-
+ 
 <script>
     //LISTAGEM DE PERSONAGENS
     async function carregarPersonagens() {
       const divResultado = document.getElementById('resultado');
-      divResultado.className = 'grid-view'; // Ativa o grid CSS
+      divResultado.className = 'grid-view';
       divResultado.innerHTML = "<p class='loading'>Carregando Personagens...</p>";
       try {
-        const response = await fetch('menu_sql.php?acao=listar_personagens'); 
-        
+        const response = await fetch('menu_sql.php?acao=listar_personagens');
+       
         if (!response.ok) throw new Error("Erro HTTP: " + response.status);
         const json = await response.json();
-        
+       
         if(json.status === 'erro') throw new Error(json.mensagem);
         divResultado.innerHTML = "";
         json.dados.forEach(p => {
-            divResultado.innerHTML += `
-              <div class="card" style="cursor:pointer;" onclick='editarPersonagem(${JSON.stringify(p)})'>
-                <h3>${p.nome}</h3>
-                <p class="info"><strong>Local:</strong> ${p.local}</p>
-                <p class="info"><strong>Idade:</strong> ${p.idade}</p>
-                <p class="info"><strong>Altura:</strong> ${p.altura}</p>
-              </div>
+            divResultado.innerHTML += `  
+                <div class="card1" onclick='editarPersonagem(${JSON.stringify(p)})'>
+                  <h3 class="cardTit1">${p.nome}</h3>
+                  <p class="info"><strong>Local:</strong> ${p.local}</p>
+                  <p class="info"><strong>Idade:</strong> ${p.idade}</p>
+                  <p class="info"><strong>Altura:</strong> ${p.altura}</p>
+                </div>
             `;
         });
       } catch (error) {
@@ -51,26 +52,26 @@
         divResultado.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
       }
     }
-
+ 
     //LISTAGEM DE LIVROS
     async function carregarLivros() {
       const divResultado = document.getElementById('resultado');
       divResultado.className = 'grid-view';
       divResultado.innerHTML = "<p class='loading'>Carregando Livros...</p>";
       try {
-        const response = await fetch('menu_sql.php?acao=listar_livros'); 
+        const response = await fetch('menu_sql.php?acao=listar_livros');
         const json = await response.json();
-        
+       
         if(json.status === 'erro') throw new Error(json.mensagem);
         divResultado.innerHTML = "";
         json.dados.forEach(livro => {
-            divResultado.innerHTML += `
-              <div class="card" style="border-left-color: #6f42c1; cursor:pointer;" onclick='editarLivro(${JSON.stringify(livro)})'>
-                <h3>${livro.nome}</h3>
-                <p class="info"><strong>Autor:</strong> ${livro.autor}</p>
-                <p class="info"><strong>Gênero:</strong> ${livro.genero}</p>
-                <p class="info"><em>${livro.descricao}</em></p>
-              </div>
+            divResultado.innerHTML += `  
+                <div class="card2" onclick='editarLivro(${JSON.stringify(livro)})'>
+                  <h3 cardTit2>${livro.nome}</h3>
+                  <p class="info"><strong>Autor:</strong> ${livro.autor}</p>
+                  <p class="info"><strong>Gênero:</strong> ${livro.genero}</p>
+                  <p class="info"><em>${livro.descricao}</em></p>
+                </div>  
             `;
         });
       } catch (error) {
@@ -78,26 +79,24 @@
         divResultado.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
       }
     }
-
+ 
     //LISTAGEM DE ATORES
     async function carregarAtores() {
       const divResultado = document.getElementById('resultado');
       divResultado.className = 'grid-view';
       divResultado.innerHTML = "<p class='loading'>Carregando Atores...</p>";
       try {
-        const response = await fetch('menu_sql.php?acao=listar_atores'); 
+        const response = await fetch('menu_sql.php?acao=listar_atores');
         const json = await response.json();
         if(json.status === 'erro') throw new Error(json.mensagem);
         divResultado.innerHTML = "";
         json.dados.forEach(ator => {
             divResultado.innerHTML += `
-              <div class="card" 
-              style="border-left-color: #ffc107; cursor: pointer;" 
-              onclick='editarAtor(${JSON.stringify(ator)})'>
-                <h3>${ator.nome}</h3>
-                <p class="info"><strong>Oscars:</strong> ${ator.num_oscars} 🏆</p>
-                <p class="info"><strong>Idade:</strong> ${ator.idade} anos</p>
-              </div>
+                <div class="card3"  onclick='editarAtor(${JSON.stringify(ator)})'>
+                  <h3 class="cardTit3">${ator.nome}</h3>
+                  <p class="info"><strong>Oscars:</strong> ${ator.num_oscars} </p>
+                  <p class="info"><strong>Idade:</strong> ${ator.idade} anos</p>
+                </div>
             `;
         });
       } catch (error) {
@@ -105,12 +104,12 @@
         divResultado.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
       }
     }
-
+ 
     //CADASTRO DE PERSONAGEM
     function montarFormPersonagem() {
       const divResultado = document.getElementById('resultado');
       divResultado.className = '';
-      
+     
       divResultado.innerHTML = `
         <h2>Novo Personagem</h2>
         <form id="formPersonagem" onsubmit="salvarPersonagem(event)">
@@ -127,7 +126,7 @@
         <div id="mensagem"></div>
       `;
     }
-
+ 
     async function salvarPersonagem(event) {
       event.preventDefault();
       const nome = document.getElementById('nome').value.trim();
@@ -145,7 +144,7 @@
         });
         const result = await response.json();
         if (result.sucesso) {
-          divMsg.innerHTML = `<p style="color:green;">${result.mensagem}</p>`;
+          divMsg.innerHTML = `<p style="color: white;">${result.mensagem}</p>`;
           document.getElementById('formPersonagem').reset(); // ID corrigido
         } else {
           divMsg.innerHTML = `<p class="erro">${result.mensagem}</p>`;
@@ -154,11 +153,11 @@
         divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
       }
     }
-
+ 
     // CADASTRO DE LIVRO
     function montarFormLivro() {
       const divResultado = document.getElementById('resultado');
-      divResultado.className = ''; 
+      divResultado.className = '';
       divResultado.innerHTML = `
         <h2>Novo Livro</h2>
         <form id="formLivro" onsubmit="salvarLivro(event)">
@@ -175,10 +174,10 @@
         <div id="mensagem_livro"></div>
       `;
     }
-
+ 
     async function salvarLivro(event) {
       event.preventDefault();
-      
+     
       const nome = document.getElementById('nome_livro').value.trim();
       const descricao = document.getElementById('desc_livro').value.trim();
       const autor = document.getElementById('autor_livro').value.trim();
@@ -193,7 +192,7 @@
         });
         const result = await response.json();
         if (result.sucesso) {
-          divMsg.innerHTML = `<p style="color:green;">{result.mensagem}</p>`;
+          divMsg.innerHTML = `<p style="color:white;">{result.mensagem}</p>`;
           document.getElementById('formLivro').reset();
         } else {
           divMsg.innerHTML = `<p class="erro">${result.mensagem}</p>`;
@@ -202,7 +201,7 @@
         divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
       }
     }
-
+ 
     // CADASTRO DE ATOR
     function montarFormAtor() {
       const divResultado = document.getElementById('resultado');
@@ -221,7 +220,7 @@
         <div id="mensagem_ator"></div>
       `;
     }
-
+ 
     async function salvarAtor(event) {
       event.preventDefault();
       const nome = document.getElementById('nome_ator').value.trim();
@@ -237,7 +236,7 @@
         });
         const result = await response.json();
         if (result.sucesso) {
-          divMsg.innerHTML = `<p style="color:green;">${result.mensagem}</p>`;
+          divMsg.innerHTML = `<p style="color:white;">${result.mensagem}</p>`;
           document.getElementById('formAtor').reset();
         } else {
           divMsg.innerHTML = `<p class="erro">${result.mensagem}</p>`;
@@ -246,25 +245,25 @@
         divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
       }
     }
-
+ 
     //EDITAR PERSONAGEM
     function editarPersonagem(personagem) {
     const divResultado = document.getElementById('resultado');
     divResultado.className = '';
-
-    const idadeDisplay = (personagem.idade === null || String(personagem.idade).toLowerCase() === 'null') 
-        ? '' 
+ 
+    const idadeDisplay = (personagem.idade === null || String(personagem.idade).toLowerCase() === 'null')
+        ? ''
         : personagem.idade;
-
-    const alturaDisplay = (personagem.altura === null || String(personagem.altura).toLowerCase() === 'null') 
-        ? '' 
+ 
+    const alturaDisplay = (personagem.altura === null || String(personagem.altura).toLowerCase() === 'null')
+        ? ''
         : String(personagem.altura).replace('.', ',');
-
-
+ 
+ 
     divResultado.innerHTML = `
         <h2>Alterar Personagem ID: ${personagem.id_personagem}</h2>
         <form id="formAlterarPersonagem" onsubmit="salvarAlteracaoPersonagem(event)">
-            <input type="hidden" id="id_personagem" value="${personagem.id_personagem}"> 
+            <input type="hidden" id="id_personagem" value="${personagem.id_personagem}">
             <label>Nome:</label>
             <input type="text" id="nome_edit" required value="${personagem.nome}"><br><br>
             <label>Local:</label>
@@ -274,8 +273,8 @@
             <label>Altura (vírgula):</label>
             <input type="text" id="altura_edit" value="${alturaDisplay}" placeholder="0,00"><br><br>
             <button type="submit" style="background-color: orange;">Salvar Alterações</button>
-            <button type="button" 
-              style="background-color: #dc3545; margin-top: 10px;" 
+            <button type="button"
+              style="background-color: #dc3545; margin-top: 10px;"
               onclick="removerPersonagem(${personagem.id_personagem}, '${personagem.nome}')">
               Remover Personagem
             </button>
@@ -283,17 +282,17 @@
         <div id="mensagem_alteracao"></div>
         `;
     }
-
+ 
     async function salvarAlteracaoPersonagem(event) {
-        event.preventDefault(); 
+        event.preventDefault();
         const id_personagem = document.getElementById('id_personagem').value;
         const nome = document.getElementById('nome_edit').value.trim();
         const local = document.getElementById('local_edit').value.trim();
         const idade = document.getElementById('idade_edit').value.trim();
-        
+       
         let altura = document.getElementById('altura_edit').value.trim();
-        altura = altura.replace(',', '.'); 
-        
+        altura = altura.replace(',', '.');
+       
         const divMsg = document.getElementById('mensagem_alteracao');
         divMsg.innerHTML = "<p class='loading'>Enviando alterações...</p>";
         try {
@@ -304,8 +303,8 @@
             });
             const result = await response.json();
             if (result.sucesso) {
-                divMsg.innerHTML = `<p style="color:green;">${result.mensagem}</p>`;
-                setTimeout(carregarPersonagens, 1500); 
+                divMsg.innerHTML = `<p style="color:white;">${result.mensagem}</p>`;
+                setTimeout(carregarPersonagens, 1500);
             } else {
                 divMsg.innerHTML = `<p class="erro">${result.mensagem}</p>`;
             }
@@ -317,11 +316,11 @@
     function editarLivro(livro) {
         const divResultado = document.getElementById('resultado');
         divResultado.className = '';
-        
+       
         divResultado.innerHTML = `
           <h2>Alterar Livro ID: ${livro.id_livro}</h2>
           <form id="formAlterarLivro" onsubmit="salvarAlteracaoLivro(event)">
-            <input type="hidden" id="id_livro_edit" value="${livro.id_livro}"> 
+            <input type="hidden" id="id_livro_edit" value="${livro.id_livro}">
             <label>Nome do Livro:</label>
             <input type="text" id="nome_livro_edit" required value="${livro.nome}"><br><br>
             <label>Descrição:</label>
@@ -331,8 +330,8 @@
             <label>Gênero:</label>
             <input type="text" id="genero_livro_edit" required value="${livro.genero}"><br><br>
             <button type="submit" style="background-color: orange;">Salvar Alterações do Livro</button>
-            <button type="button" 
-                style="background-color: #dc3545; margin-top: 10px;" 
+            <button type="button"
+                style="background-color: #dc3545; margin-top: 10px;"
                 onclick="removerLivro(${livro.id_livro}, '${livro.nome}')">
                 Remover Livro
             </button>
@@ -340,15 +339,15 @@
           <div id="mensagem_alteracao_livro"></div>
         `;
     }
-
+ 
     async function salvarAlteracaoLivro(event) {
-        event.preventDefault(); 
+        event.preventDefault();
         const id_livro = document.getElementById('id_livro_edit').value;
         const nome = document.getElementById('nome_livro_edit').value.trim();
         const descricao = document.getElementById('desc_livro_edit').value.trim();
         const autor = document.getElementById('autor_livro_edit').value.trim();
         const genero = document.getElementById('genero_livro_edit').value.trim();
-        
+       
         const divMsg = document.getElementById('mensagem_alteracao_livro');
         divMsg.innerHTML = "<p class='loading'>Enviando alterações...</p>";
         try {
@@ -360,8 +359,8 @@
             if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
             const result = await response.json();
             if (result.sucesso) {
-                divMsg.innerHTML = `<p style="color:green;">${result.mensagem}</p>`;
-                setTimeout(carregarLivros, 1500); 
+                divMsg.innerHTML = `<p style="color:white;">${result.mensagem}</p>`;
+                setTimeout(carregarLivros, 1500);
             } else {
                 divMsg.innerHTML = `<p class="erro"> ${result.mensagem}</p>`;
             }
@@ -369,15 +368,15 @@
             divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
         }
     }
-
+ 
     //EDITAR ATOR
     function editarAtor(ator) {
         const divResultado = document.getElementById('resultado');
-        divResultado.className = ''; 
+        divResultado.className = '';
         divResultado.innerHTML = `
           <h2>Alterar Ator/Atriz ID: ${ator.id_ator}</h2>
           <form id="formAlterarAtor" onsubmit="salvarAlteracaoAtor(event)">
-            <input type="hidden" id="id_ator_edit" value="${ator.id_ator}"> 
+            <input type="hidden" id="id_ator_edit" value="${ator.id_ator}">
             <label>Nome:</label>
             <input type="text" id="nome_ator_edit" required value="${ator.nome}"><br><br>
             <label>Número de Oscars:</label>
@@ -385,8 +384,8 @@
             <label>Idade:</label>
             <input type="number" id="idade_ator_edit" required value="${ator.idade}"><br><br>
             <button type="submit" style="background-color: orange;">Salvar Alterações do Ator</button>
-            <button type="button" 
-                style="background-color: #dc3545; margin-top: 10px;" 
+            <button type="button"
+                style="background-color: #dc3545; margin-top: 10px;"
                 onclick="removerAtor(${ator.id_ator}, '${ator.nome}')">
                 Remover Ator
             </button>
@@ -394,14 +393,14 @@
           <div id="mensagem_alteracao_ator"></div>
         `;
     }
-
+ 
     async function salvarAlteracaoAtor(event) {
-        event.preventDefault(); 
+        event.preventDefault();
         const id_ator = document.getElementById('id_ator_edit').value;
         const nome = document.getElementById('nome_ator_edit').value.trim();
         const num_oscars = document.getElementById('oscars_ator_edit').value.trim();
         const idade = document.getElementById('idade_ator_edit').value.trim();
-        
+       
         const divMsg = document.getElementById('mensagem_alteracao_ator');
         divMsg.innerHTML = "<p class='loading'>Enviando alterações...</p>";
         try {
@@ -413,9 +412,9 @@
             if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
             const result = await response.json();
             if (result.sucesso) {
-                divMsg.innerHTML = `<p style="color:green;"> ${result.mensagem}</p>`;
+                divMsg.innerHTML = `<p style="color:white;"> ${result.mensagem}</p>`;
                 // Recarregar a lista para ver a alteração
-                setTimeout(carregarAtores, 1500); 
+                setTimeout(carregarAtores, 1500);
             } else {
                 divMsg.innerHTML = `<p class="erro"> ${result.mensagem}</p>`;
             }
@@ -423,17 +422,17 @@
             divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
         }
     }
-
+ 
     //REMOÇÃO DE PERSONAGEM
 async function removerPersonagem(id, nome) {
-
+ 
     if (!confirm(`Tem certeza que deseja remover o personagem: ${nome} (ID: ${id})? Essa ação é irreversível.`)) {
         return;
     }
-    
-    const divMsg = document.getElementById('mensagem_alteracao'); 
+   
+    const divMsg = document.getElementById('mensagem_alteracao');
     divMsg.innerHTML = "<p class='loading'>Removendo...</p>";
-
+ 
     try {
         const response = await fetch('deletar_personagem.php', {
             method: 'POST',
@@ -442,8 +441,8 @@ async function removerPersonagem(id, nome) {
         });
         const result = await response.json();
         if (result.sucesso) {
-            divMsg.innerHTML = `<p style="color:green;"> ${result.mensagem}</p>`;
-            setTimeout(carregarPersonagens, 1500); 
+            divMsg.innerHTML = `<p style="color:white;"> ${result.mensagem}</p>`;
+            setTimeout(carregarPersonagens, 1500);
         } else {
             divMsg.innerHTML = `<p class="erro"> ${result.mensagem}</p>`;
         }
@@ -451,14 +450,14 @@ async function removerPersonagem(id, nome) {
         divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
     }
     }
-
+ 
     //REMOÇÃO DE LIVRO
     async function removerLivro(id, nome) {
         if (!confirm(`Tem certeza que deseja remover o Livro: ${nome} (ID: ${id})? Essa ação é irreversível.`)) {
             return;
         }
-        
-        const divMsg = document.getElementById('mensagem_alteracao_livro'); 
+       
+        const divMsg = document.getElementById('mensagem_alteracao_livro');
         divMsg.innerHTML = "<p class='loading'>Removendo...</p>";
         try {
             const response = await fetch('deletar_livro.php', {
@@ -468,8 +467,8 @@ async function removerPersonagem(id, nome) {
             });
             const result = await response.json();
             if (result.sucesso) {
-                divMsg.innerHTML = `<p style="color:green;"> ${result.mensagem}</p>`;
-                setTimeout(carregarLivros, 1500); 
+                divMsg.innerHTML = `<p style="color:white;"> ${result.mensagem}</p>`;
+                setTimeout(carregarLivros, 1500);
             } else {
                 divMsg.innerHTML = `<p class="erro"> ${result.mensagem}</p>`;
             }
@@ -477,14 +476,14 @@ async function removerPersonagem(id, nome) {
             divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
         }
     }
-
+ 
     // REMOÇÃO DE ATOR
     async function removerAtor(id, nome) {
         if (!confirm(`Tem certeza que deseja remover o Ator(a): ${nome} (ID: ${id})? Essa ação é irreversível.`)) {
             return;
         }
-        
-        const divMsg = document.getElementById('mensagem_alteracao_ator'); 
+       
+        const divMsg = document.getElementById('mensagem_alteracao_ator');
         divMsg.innerHTML = "<p class='loading'>Removendo...</p>";
         try {
             const response = await fetch('deletar_ator.php', {
@@ -494,8 +493,8 @@ async function removerPersonagem(id, nome) {
             });
             const result = await response.json();
             if (result.sucesso) {
-                divMsg.innerHTML = `<p style="color:green;"> ${result.mensagem}</p>`;
-                setTimeout(carregarAtores, 1500); 
+                divMsg.innerHTML = `<p style="color:white;"> ${result.mensagem}</p>`;
+                setTimeout(carregarAtores, 1500);
             } else {
                 divMsg.innerHTML = `<p class="erro"> ${result.mensagem}</p>`;
             }
@@ -503,8 +502,9 @@ async function removerPersonagem(id, nome) {
             divMsg.innerHTML = `<p class="erro">Erro: ${error.message}</p>`;
         }
     }
-
+ 
 </script>
-
+ 
 </body>
 </html>
+ 
